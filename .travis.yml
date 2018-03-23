@@ -9,15 +9,22 @@ cache:
 
 install:
 - pip install grow --user
+- pip install gsutil --user
 - npm install -g gulp-cli
 - npm install
 
 jobs:
   include:
-    - stage: build-first
-      script: grow build --re-route --locale None --locale en --locale de --locale es
-    - stage: build-second
-      script: grow build --re-route --locale None --locale fr --locale id --locale it --locale ja --locale ko --locale pt_BR --locale ru --locale tr --locale zh_CN
+    - stage: build
+      script:
+        - grow build --re-route --locale None --locale en --locale de --locale es
+        - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
+      script:
+        - grow build --re-route --locale fr --locale id --locale it --locale ja --locale ko --locale pt_BR
+        - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
+      script:
+        - grow build --re-route  --locale ko --locale pt_BR --locale ru --locale tr --locale zh_CN
+        - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: deploy
       install:
         - npm install -g firebase-tools
