@@ -9,7 +9,6 @@ cache:
 
 install:
 - pip install grow --user
-- pip install gsutil --user
 - npm install -g gulp-cli
 - npm install
 
@@ -18,14 +17,17 @@ jobs:
     - stage: build
       script:
         - grow build --re-route --locale None --locale en --locale de --locale es
+        - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
         - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: build
       script:
       - grow build --re-route --locale None --locale fr --locale id --locale it --locale ja --locale ko --locale pt_BR
+      - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: build
       script:
       - grow build --re-route --locale None  --locale ko --locale pt_BR --locale ru --locale tr --locale zh_CN
+      - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: deploy
       install:
