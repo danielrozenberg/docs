@@ -49,9 +49,8 @@ jobs:
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then firebase use staging; fi'
       - mkdir build
       - pip install gsutil --user
-      - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build; fi'
-      - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r gs://ampproject-staging.appspot.com/* build; fi'
-      - gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build
+      - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m rsync -r gs://ampproject-b5f4c.appspot.com/ build; fi'
+      - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m rsync -r gs://ampproject-staging.appspot.com/ build; fi'
       - ls build
 # TODO: renenable        - firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
 
