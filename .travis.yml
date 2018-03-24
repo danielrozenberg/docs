@@ -53,7 +53,7 @@ jobs:
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r gs://ampproject-staging.appspot.com/* build; fi'
         - gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build
         - ls build
-#        - firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
+# TODO: renenable        - firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
 
 branches:
   only:
