@@ -19,25 +19,25 @@ jobs:
   include:
     - stage: build
       script:
-      - grow build --re-route --locale None --locale en --locale de --locale es
+      - travis_wait grow build --re-route --locale None --locale en --locale de --locale es
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com; fi'
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r build/* gs://ampproject-staging.appspot.com; fi'
     - stage: build
       script:
-      - grow build --re-route --locale fr --locale id --locale it --locale ja
+      - travis_wait grow build --re-route --locale fr --locale id --locale ja
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com; fi'
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r build/* gs://ampproject-staging.appspot.com; fi'
     - stage: build
       script:
-      - grow build --re-route  --locale ko --locale pt_BR --locale ru
+      - travis_wait grow build --re-route  --locale it --locale ko --locale pt_BR
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com; fi'
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r build/* gs://ampproject-staging.appspot.com; fi'
     - stage: build
       script:
-      - grow build --re-route  --locale tr --locale zh_CN
+      - travis_wait grow build --re-route  --locale tr --locale zh_CN --locale ru
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com; fi'
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r build/* gs://ampproject-staging.appspot.com; fi'
