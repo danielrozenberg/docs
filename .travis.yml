@@ -18,17 +18,17 @@ jobs:
       script:
         - grow build --re-route --locale None --locale en --locale de --locale es
         - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
-        - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
+        - gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com
     - stage: build
       script:
       - grow build --re-route --locale fr --locale id --locale it --locale ja --locale ko --locale pt_BR
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
-      - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
+      - gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com
     - stage: build
       script:
       - grow build --re-route  --locale ko --locale pt_BR --locale ru --locale tr --locale zh_CN
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
-      - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
+      - gsutil -m cp -r build/* gs://ampproject-b5f4c.appspot.com
     - stage: deploy
       install:
         - npm install -g firebase-tools
