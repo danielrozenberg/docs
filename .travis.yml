@@ -41,6 +41,7 @@ jobs:
         - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then firebase use production; fi'
         - 'if [ "${TRAVIS_BRANCH}" = "master" ]; then firebase use staging; fi'
         - mkdir build
+        - pip install gsutil --user
         - gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build
         - ls build
 #        - firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
