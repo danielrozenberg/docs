@@ -21,12 +21,12 @@ jobs:
         - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: build
       script:
-      - grow build --re-route --locale None --locale fr --locale id --locale it --locale ja --locale ko --locale pt_BR
+      - grow build --re-route --locale fr --locale id --locale it --locale ja --locale ko --locale pt_BR
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: build
       script:
-      - grow build --re-route --locale None  --locale ko --locale pt_BR --locale ru --locale tr --locale zh_CN
+      - grow build --re-route  --locale ko --locale pt_BR --locale ru --locale tr --locale zh_CN
       - pip install gsutil --user # can't do this before grow has run, as the oath2client is incompatible
       - gsutil cp build/* gs://ampproject-b5f4c.appspot.com
     - stage: deploy
@@ -49,13 +49,3 @@ branches:
 env:
   global:
     secure: RRx3CaLmCC0rA+MOYXTI3HTAMc2TI9AQcodUfZhr+vNEL8d0q09EZkYU/TjkRx9VQ1paOT1AmxNQJtHhysIS7B/pSAZoNG9bPC5UXmiZHVLbRB4qPmMMte9zdfKanGY3/g3zt2qOTUVVL4ymDy5xK2uYZ/KgkrDx1gGH3mSoTO6gK79I4nisJYDcRfzI/UUvrNkdjlFYrFnZbnMdnqZSryuv7CrdZWpYtLDryzJ+bcgq6Vr2liiKwmVb+/tff3EblAzBcWMAM4I0MzRaM+Mahw0EEENc24brtVoQTbvSdXXJ9CEIfWjykSyZh0WrZkx3tKY95GDr9PCHEkyI5d2kUGYDbRjjrEuBEdPTcjx6zZ2vXUlVPeDxNwLO1WZwVy0Om1dg/jwPjVDtsubjBaC+4XezJCywaZruGD6Q0iStemMVapN19SbGJzo9uYG8EvVB4OFlmY2l/fOadTIC9YHpYJREhGc2DBW9jHfTK1dgyW1JpnFgieEOSw24gsvbxSSV5db7tJU36Pt1Kkcu3IZnYyHlBUmYKZ24cizh6azfkHRaLvSvdJuvx0euuoz/WOJ77toUD6wPc0/OtrKnkCfQowtciMdnKNhuu4JpegdZ9gQqpV2gQ0XpPgxc4afKCd0L5QiUNFCu1J+fQ0obclqWZpC0VzHdDpNMckv4I7XqnhI=
-
-deploy:
-  provider: gcs
-  access_key_id: GOOG363HBMUBIVAZ465P
-  secret_access_key:
-    secure: Ww5fXRilIT2MOTHD+OvWeSMN6GeXrR9hvPo6ERd2vFPK3g6sB2F1wvq3U7QJo1S3JjCQ3zQQLjek9WLqem5ALZgWJJMEcMnJCla0Zt/D9VGlkrgw5X2Kk9X6+ff6XLBD2OATOXvoPOlQLPUKAIR4YRrI8I2GSizT19plkpwIKGz2MxTHHWpsQvI5LQS4mRzSWcOtSKQKfejWSyix7+1LFkpthxijzn9Nx0hD66dnSCTPdEZSrb5HoYOSbm8oeMIv5JflyOWoAs4HYke5muQCyfUxoPal2ioEkrf2bHYQsiXbigqxloDU3y+cK0JDKigBvCL2rkbaVDk08N+X3GoUTCnKuVH9vjVAHJiROf/wfMzCm8pmUgTh0QFyVGdzUaFBbShSAn18xR6h2kM/wMFNQGS0baqq6LMNQX0yt7ACdw2bHFDvD4ZoPuTTKr0Ji0a5WwD0f1XdX185oPftMJb0y1HT6hnmJriOuppIM6oDs7dbiJnqp+OqZyzFp6bSWmwUrn4zGcbjCGKl+ol8s3uRWC2XksoArTCHZDj4Aw5PkYW+N2C3KzYSYykikUvZvLiq9QWTeq0AFwDlH0K+vrUDraXRPBWP4opPednNQRo7SPC6IY5i0tJkNdNQKbfoEsDV8LG36OF9TjmA9S96FN5cleYp6iqJ3UEwOC6cdVarCXw=
-  bucket: ampproject-b5f4c.appspot.com
-  local-dir: build
-  on:
-    repo: ampproject/docs
