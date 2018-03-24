@@ -43,16 +43,16 @@ jobs:
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r build/* gs://ampproject-staging.appspot.com; fi'
     - stage: deploy
       install:
-        - npm install -g firebase-tools
+      - npm install -g firebase-tools
       script:
-        - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then firebase use production; fi'
-        - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then firebase use staging; fi'
-        - mkdir build
-        - pip install gsutil --user
+      - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then firebase use production; fi'
+      - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then firebase use staging; fi'
+      - mkdir build
+      - pip install gsutil --user
       - 'if [ "${TRAVIS_BRANCH}" = "production" ]; then gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build; fi'
       - 'if [ "${TRAVIS_BRANCH}" = "parallel" ]; then gsutil -m cp -r gs://ampproject-staging.appspot.com/* build; fi'
-        - gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build
-        - ls build
+      - gsutil -m cp -r gs://ampproject-b5f4c.appspot.com/* build
+      - ls build
 # TODO: renenable        - firebase deploy --token "$FIREBASE_TOKEN" --non-interactive
 
 branches:
